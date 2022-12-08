@@ -1,0 +1,81 @@
+h1.titleHero {
+    font-size: 500%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 100px;
+    background: var(--linearGradient);
+}
+
+div.un {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+div.deux {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 30vw;
+    height: 45vh;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    margin: auto;
+}
+
+form label {
+    margin-bottom: 2%;
+}
+
+input.inputForm {
+    padding: 2% 4%;
+    font-size: 100%;
+    width: 100%;
+    border: 1px solid var(--primaryDark);
+    background-color: var(--primaryHovered);
+    margin-bottom: 3%;
+    outline: none;
+    border-radius: 4px;
+    color: var(--color);
+    transition: all 0.3s ease-in-out;
+}
+
+input.inputForm:focus {
+    border: 1px solid var(--blue);
+}
+
+button#sendForm {
+    color: transparent;
+}
+
+button#sendForm {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    width: 50%;
+    padding: 1% 10%;
+    justify-content: center;
+    overflow: hidden;
+    outline: none;
+    background-color: var(--primaryHovered);
+    border: 1px solid var(--primaryDark);
+    color: var(--color);
+    border-radius: 5px;
+    transform: scale(1.1);
+    gap: 5%;
+}
+
+button#sendForm:hover{
+    background-color: var(--color);
+    color: var(--primaryDark)
+}

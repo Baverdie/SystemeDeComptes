@@ -1,0 +1,26 @@
+div.un {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    padding: auto;
+    margin-top: 200px;
+    background: var(--linearGradient);
+}
+
+h1.titleHero {
+    font-size: 500%;  
+}
+
+div.linkA {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 20vw;
+    margin-left: 40%;
+    margin-top: 100px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color);
+}
