@@ -11,6 +11,39 @@ h1.titleHero {
     font-size: 500%;  
 }
 
+div.log {
+    width: 100vw;
+    margin-top: 5%;
+    
+}
+
+p.userInfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 200%;
+}
+
+button#deconnexion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5% auto 0 auto;
+    transform: scale(1.5);
+    padding: 1% 4%;
+    border-radius: 10px;
+    background-color: var(--dislike);
+    background: linear-gradient(to left, var(--error), var(--dislike));
+    width: 20vw;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+    border: none;
+}
+
+button#deconnexion:hover {
+    box-shadow: 0px 0px 50px var(--dislike);
+}
+
 div.linkA {
     display: flex;
     justify-content: space-between;

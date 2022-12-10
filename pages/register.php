@@ -1,4 +1,11 @@
 <?php
+    session_start();
+    if (isset($_SESSION)) {
+        session_destroy();
+        exit();
+    }
+    // session_start();
+    header("X-FRAME-OPTIONS: DENY");
     $pdo = new PDO('sqlite:../backend/data.db');
     $statement = $pdo->query("SELECT * FROM USERS");
     if ($statement === FALSE){
@@ -13,9 +20,22 @@
             $infoEmail = htmlspecialchars($_POST['email']);
             $userName = htmlspecialchars($_POST['pseudo']);
             $userMdp = password_hash($_POST['mdp'], PASSWORD_BCRYPT);
-            $sql = "INSERT INTO users(userName, userMdp, infoName, infoFirstname, infoEmail)VALUES(?, ?, ?, ?, ?)";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([$userName, $userMdp, $infoName, $infoFirstname, $infoEmail]);
+            $userMdpConfirm = password_hash($_POST['mdpConfirm'], PASSWORD_BCRYPT);
+
+            if ($user[1] == $userName) {
+                echo "Nom d'utilisateur indisponible";
+            }elseif (count_chars($userName) < 4) {
+                echo "Le nom d'utilisateur doit contenir au moins 4 caractère";
+            }elseif (count_chars($userMdp) < 8) {
+                echo "Le mot de passe doit contenir au minimum 8 carractère";
+            }elseif ($userMdp != $userMdpConfirm) {
+                echo "Les mots de passe doivent être identiques";
+            }else {
+                $sql = "INSERT INTO users(userName, userMdp, infoName, infoFirstname, infoEmail) VALUES (?, ?, ?, ?, ?)";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([$userName, $userMdp, $infoName, $infoFirstname, $infoEmail]);
+                header('Location: ./login.php');
+            }
         }else{
             echo "Veuillez compléter tous les champs";
         }
@@ -48,6 +68,8 @@
                     <input type="text" name="pseudo" class="inputForm" autocomplete="off">
                     <label for="mdp">Mot de passe * : </label>
                     <input type="password" name="mdp" class="inputForm" autocomplete="off">
+                    <label for="mdp">Confirmer le mot de passe * : </label>
+                    <input type="password" name="mdpConfirm" class="inputForm" autocomplete="off">
                     <button name="envoie" id="sendForm">Envoyer</button>
                 </form>
             </div>

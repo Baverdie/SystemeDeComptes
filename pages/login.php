@@ -1,6 +1,9 @@
 <?php
+    session_start();
+    header("X-FRAME-OPTIONS: DENY");
     $pdo = new PDO('sqlite:../backend/data.db');
     $statement = $pdo->query("SELECT * FROM USERS");
+    $_SESSION['isLog'] = false;
     if ($statement === FALSE){
         die('Erreur SQL');
     }
@@ -9,18 +12,17 @@
     if(isset($_POST['envoie'])){
         if(!empty($_POST['pseudo']) && !empty($_POST['mdp'])){
             $userName = htmlspecialchars($_POST['pseudo']);
-            $userMdp = password_hash($_POST['mdp'], PASSWORD_BCRYPT);
-            
-            $verify = $pdo->prepare('SELECT * FROM USERS WHERE pseudo = ? AND mdp = ?');
-            $verify->execute(array($pseudo, $mdp));
+            $userMdp = htmlspecialchars($_POST['mdp']);
 
-            if($verify->rowCount() > 0) {
-                $_SESSION['pseudo'] = $pseudo;
-                $_SESSION['mdp'] = $mdp;
-                $_SESSION['id'] = $verify->fetchAll()['id'];
-                header('Location: ../index.php');
-            }else {
-                echo "Nom d'utilisateur ou mot de passe incorrecte";
+            foreach ($users as $user) {
+                if($user[1] == $userName && $user[2] == password_verify($userMdp, $user[2])) {
+                    $_SESSION['pseudo'] = $userName;
+                    $_SESSION['id'] = $user[0];
+                    $_SESSION['isLog'] = true;
+                    header('Location: ../index.php');
+                }else {
+                    echo "Nom d'utilisateur ou mot de passe incorrecte";
+                }
             }
         }else{
             echo "Veuillez compléter tous les champs";

@@ -9,6 +9,8 @@
     --primaryVeryLight: #3a3a3a;
     --primaryDark: #1e1e1e;
 
+    --dislike: #801c1c;
+    --error: #ff7676;
     --linearGradient: linear-gradient(135deg, rgba(0, 255, 119, 0.8) 0%, rgba(15, 2, 255, 0.8) 100%);
 }
 
